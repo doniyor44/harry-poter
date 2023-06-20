@@ -1,0 +1,71 @@
+<style>
+    .flex {
+  width: 300px;
+  padding-left: 0;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+}
+
+.item.active {
+  color: red
+}
+
+.panel:not(.active) {
+  display: none;
+}
+</style>
+<ul class="flex">
+  <li>LINK 1</li>
+  <li>LINK 2</li>
+  <li>LINK 3</li>
+</ul>
+
+
+<hr>
+<br>
+<br>
+
+<div class="flex">
+  <div class="item active" data-tab="tab-1">TAB item 1</div>
+  <div class="item" data-tab="tab-2">TAB item 2</div>
+  <div class="item" data-tab="tab-3">TAB item 3</div>
+</div>
+
+<hr>
+
+<div class="panel active" id="tab-1">Tab content 1</div>
+<div class="panel" id="tab-2">Tab content 2</div>
+<div class="panel" id="tab-3">Tab content 3</div>
+
+
+
+<script>
+    const tabLinks = document.querySelectorAll('.item'),
+      tabContent = document.querySelectorAll('.panel'),
+      tabActive = 'active';
+
+
+[].forEach.call(tabLinks, (el) => {
+  el.addEventListener('click', openTabs);
+});
+
+
+function openTabs(el) {
+  let btnTarget = el.currentTarget,
+    idTab = btnTarget.dataset.tab;
+
+  [].forEach.call(tabContent, (el) => {
+    el.classList.remove(tabActive);
+  });
+
+  [].forEach.call(tabLinks, (el) => {
+    el.classList.remove(tabActive);
+  });
+
+  document.querySelector("#" + idTab).classList.add(tabActive);
+
+  btnTarget.classList.add(tabActive);
+}
+
+</script>
